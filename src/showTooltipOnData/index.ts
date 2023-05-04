@@ -86,6 +86,21 @@ export function showTooltipOnData(
       if (tooltip === null) {
         removeTooltips()
         tooltip = showTooltip(event.pageX, event.pageY, content)
+
+        if (x + 16 > xCoordinates[xCoordinates.length - 1] && y - 24 < 0) {
+          tooltip.style.left = `${x - 24}px`
+          tooltip.style.top = `${y + 16}px`
+        }
+
+        if (x + 16 > xCoordinates[xCoordinates.length - 1]) {
+          tooltip.style.top = `${y - 16}px`
+          tooltip.style.left = `${x - 24}px`
+        }
+
+        if (y - 24 < 0) {
+          tooltip.style.top = `${y + 16}px`
+          tooltip.style.left = `${x + 16}px`
+        }
       }
     }
   })
