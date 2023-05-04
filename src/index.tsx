@@ -19,9 +19,15 @@ export function Chart(cfg: CfgType) {
     cfg.dimensions.paddingX = 40
   }
 
-  const aspectRatio = cfg.dimensions.maxWidth / cfg.dimensions.maxHeight
+  if (cfg.dimensions.paddingX < 0) cfg.dimensions.paddingX = 0
 
-  let debounceTimeout: number
+  if (cfg.dimensions.maxWidth - cfg.dimensions.paddingX < 300) {
+    cfg.dimensions.maxWidth = 300
+    cfg.dimensions.paddingX = 0
+  }
+  if (cfg.dimensions.maxHeight < 150) cfg.dimensions.maxHeight = 150
+
+  const aspectRatio = cfg.dimensions.maxWidth / cfg.dimensions.maxHeight
 
   useEffect(() => {
     ctx = canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
@@ -30,6 +36,14 @@ export function Chart(cfg: CfgType) {
         canvasRef.current.width =
           cfg.dimensions.maxWidth - cfg.dimensions.paddingX
         canvasRef.current.height = cfg.dimensions.maxHeight
+      } else if (innerWidth - cfg.dimensions.paddingX < 300) {
+        canvasRef.current.width = 300
+        canvasRef.current.height =
+          300 / aspectRatio < 150 ? 150 : 300 / aspectRatio
+      } else if (innerHeight < 150) {
+        canvasRef.current.height = 150
+        canvasRef.current.width =
+          150 * aspectRatio < 300 ? 300 : 150 * aspectRatio
       } else {
         canvasRef.current.width = innerWidth - cfg.dimensions.paddingX
         canvasRef.current.height = innerWidth / aspectRatio
@@ -40,23 +54,12 @@ export function Chart(cfg: CfgType) {
 
   function generateChart(cfg: CfgType) {
     drawChart(canvasRef, ctx, cfg)
-    cfg.responsive && debouncedResize()
+    cfg.responsive && resize()
   }
 
-  function debouncedResize() {
-    if (!cfg.responsive) {
-      window.removeEventListener('resize', debouncedResize)
-      return
-    }
-
-    clearTimeout(debounceTimeout)
-
-    debounceTimeout = setTimeout(
-      () => resizeCanvas(drawChart, canvasRef, ctx, cfg),
-      100,
-    )
-
-    window.addEventListener('resize', debouncedResize)
+  function resize() {
+    resizeCanvas(drawChart, canvasRef, ctx, cfg)
+    window.addEventListener('resize', resize)
   }
 
   return <canvas ref={canvasRef} />

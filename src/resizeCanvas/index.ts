@@ -26,6 +26,14 @@ export function resizeCanvas(
       canvasRef.current.width =
         cfg.dimensions.maxWidth - cfg.dimensions.paddingX
       canvasRef.current.height = cfg.dimensions.maxHeight
+    } else if (innerWidth - cfg.dimensions.paddingX < 300) {
+      canvasRef.current.width = 300
+      canvasRef.current.height =
+        300 / aspectRatio < 150 ? 150 : 300 / aspectRatio
+    } else if (innerHeight < 150) {
+      canvasRef.current.height = 150
+      canvasRef.current.width =
+        150 * aspectRatio < 300 ? 300 : 150 * aspectRatio
     } else {
       canvasRef.current.width = innerWidth - cfg.dimensions.paddingX
       canvasRef.current.height = innerWidth / aspectRatio
