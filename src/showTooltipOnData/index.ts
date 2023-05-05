@@ -46,11 +46,20 @@ export function showTooltipOnData(
         removeTooltip(tooltip)
       }
 
+      const canvasRect = canvasRef.current!.getBoundingClientRect()
+      const distanceToCanvasBorderX = event.pageX - canvasRect.left
+      const distanceToCanvasBorderY = canvasRect.bottom - event.pageY
+      const maxYCoordinate = Math.max(...yCoordinates)
+
       const tooltipElement = document.createElement('span')
       tooltipElement.className = 'tooltip'
       tooltipElement.style.position = 'absolute'
-      tooltipElement.style.top = `${y - 16}px`
-      tooltipElement.style.left = `${x + 16}px`
+      tooltipElement.style.top =
+        maxYCoordinate < distanceToCanvasBorderY ? `${y}px` : `${y - 24}px`
+      tooltipElement.style.left =
+        distanceToCanvasBorderX + 16 > xCoordinates[xCoordinates.length - 1]
+          ? `${x - 80}px`
+          : `${x + 16}px`
       tooltipElement.style.backgroundColor = '#1e1e1e33'
       tooltipElement.style.padding = '4px 8px'
       tooltipElement.style.borderRadius = '8px'
@@ -86,21 +95,6 @@ export function showTooltipOnData(
       if (tooltip === null) {
         removeTooltips()
         tooltip = showTooltip(event.pageX, event.pageY, content)
-
-        if (x + 16 > xCoordinates[xCoordinates.length - 1] && y - 24 < 0) {
-          tooltip.style.left = `${x - 24}px`
-          tooltip.style.top = `${y + 16}px`
-        }
-
-        if (x + 16 > xCoordinates[xCoordinates.length - 1]) {
-          tooltip.style.top = `${y - 16}px`
-          tooltip.style.left = `${x - 24}px`
-        }
-
-        if (y - 24 < 0) {
-          tooltip.style.top = `${y + 16}px`
-          tooltip.style.left = `${x + 16}px`
-        }
       }
     }
   })
