@@ -45,7 +45,8 @@ Create a variable with the configurations.
     { x: 'II/II/II', y: 9 },
     { x: 'JJ/JJ/JJ', y: 19 },
   ],
-  dataFormat: '', // dataFormat?: 'US' | 'BR' | '%' | 'º' | ''
+  // dataFormat?:  | 'USD'| 'EUR' | 'JPY' | 'GBP' | 'AUD' | 'CHF' | 'CAD' | 'CNY' | 'SEK' | 'NZD' | 'BRL' | 'RUB' | 'INR' | 'MXN' | '%' | 'º'
+  dataFormat: 'USD',
   lineWidth: 2, // lineWidth?: number
   color: '#0e9cff', // color?: string
   animation: { // optional
@@ -105,4 +106,12 @@ Call the component passing the configurations.
 
 ```js
 <Chart {...cfg}/>
+
 ```
+<br/>
+
+## Licença
+
+<br/>
+
+[MIT](LICENSE)
