@@ -7,7 +7,10 @@ import { DataFormatType } from '../sharedTypes'
  * @param dataFormat Format that data must be presented
  * @returns Object with Y labels
  */
-export function calculateYLabels(data: number[], dataFormat: DataFormatType) {
+export function calculateYLabels(
+  data: number[],
+  dataFormat?: DataFormatType | null,
+) {
   const yLabels = []
 
   const maxData = Math.max(...data)

@@ -14,7 +14,7 @@ export function showTooltipOnData(
   data: number[],
   xCoordinates: number[],
   yCoordinates: number[],
-  dataFormat: DataFormatType,
+  dataFormat?: DataFormatType | null,
 ) {
   let tooltip: HTMLElement | null = null
 

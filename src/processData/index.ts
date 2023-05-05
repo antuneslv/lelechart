@@ -1,4 +1,4 @@
-import { CfgType } from '../sharedTypes'
+import { CfgType, DataFormatType } from '../sharedTypes'
 
 /**
  * Process the data to ensure the app doesn't break
@@ -32,9 +32,9 @@ export function processData(cfg: CfgType) {
     }
   })
 
-  let dataFormat = rawDataFormat
+  let dataFormat: DataFormatType | undefined | null = rawDataFormat
 
-  if (!dataFormat) dataFormat = ''
+  if (!dataFormat) dataFormat = null
 
   let animation = rawAnimation
 

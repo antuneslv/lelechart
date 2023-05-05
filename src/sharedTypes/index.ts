@@ -70,7 +70,23 @@ export type PaddingsType = {
   paddingRight: number
 }
 
-export type DataFormatType = 'US' | 'BR' | '%' | 'º' | ''
+export type DataFormatType =
+  | 'USD'
+  | 'EUR'
+  | 'JPY'
+  | 'GBP'
+  | 'AUD'
+  | 'CHF'
+  | 'CAD'
+  | 'CNY'
+  | 'SEK'
+  | 'NZD'
+  | 'BRL'
+  | 'RUB'
+  | 'INR'
+  | 'MXN'
+  | '%'
+  | 'º'
 
 export type DrawCfgType = {
   lineWidth: number
