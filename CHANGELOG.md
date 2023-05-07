@@ -6,11 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.4.0] - 2023-05-06
+
+### Added
+
+- Tooltip component
+
+### Changed
+
+- AggregateCalculatedData function(separate from drawChart)
+- drawChart function moved to Canvas component
+- Readme
+
+### Removed
+
+- Old tooltip function
+
+
 ## [1.3.0] - 2023-05-05
 
 ### Added
 
-- Added new currency formats
+- New currency formats
 
 ## [1.2.1] - 2023-05-04
 
@@ -22,10 +39,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix canvas resize when width is less than 300 and hight less than 150
-- Removed debouce resize function
-- Fix javascript calculation error when calculate y labels
+- Canvas resize when width is less than 300 and hight less than 150
+- Javascript calculation error when calculate y labels
 - Improve tooltip position
+
+### Removed
+
+- Debouce resize function
 
 ## [1.1.0] - 2023-05-03
 
