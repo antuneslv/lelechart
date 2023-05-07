@@ -20,9 +20,28 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "eslint-plugin-import-helpers"
     ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "import-helpers/order-imports": [
+          "warn",
+          {
+            "newlinesBetween": "always",
+            "groups": [
+              ["/^react$/"],
+              "module",
+              "/^@/",
+              ["parent", "sibling", "index"]
+            ],
+            "alphabetize": { "order": "ignore", "ignoreCase": true }
+          }
+        ]
     }
 }

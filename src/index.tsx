@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
+
 import { aggregateCalculatedData } from './aggregateCalculatedData'
 import { resizeCanvas } from './resizeCanvas'
 import { CfgType, aggregateCalculatedDataType } from './sharedTypes'

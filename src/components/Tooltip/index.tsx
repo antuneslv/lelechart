@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { formatData } from '../../formatData'
 import { DataFormatType, tooltipCfgType } from '../../sharedTypes'
 

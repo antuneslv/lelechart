@@ -5,17 +5,24 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
-  "type": "git",
-  "url": "https://github.com/antuneslv/lelechart"
+    "type": "git",
+    "url": "https://github.com/antuneslv/lelechart"
   },
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
     "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
     "lint": "eslint src/**/*.ts* --fix"
   },
-  "keywords": ["chart", "react", "typescript", "javascript"],
+  "keywords": [
+    "chart",
+    "react",
+    "typescript",
+    "javascript"
+  ],
   "author": "Leandro Vendemiatto Antunes",
   "license": "MIT",
   "devDependencies": {
@@ -25,6 +32,7 @@
     "@typescript-eslint/parser": "^5.59.1",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import-helpers": "^1.3.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.8",

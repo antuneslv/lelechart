@@ -6,6 +6,10 @@ LeleChart is a React chart library that enables you to create custom charts for 
 
 <br/>
 
+![LeleChart](/assets/lelechart-img.png)
+
+<br/>
+
 ## Quick Start
 
 <br/>
@@ -34,16 +38,16 @@ Create a variable with the configurations.
     paddingX: 40, // paddingX: number
   },
   data: [
-    { x: 'AA/AA/AA', y: 5 }, // { x?: string | number; y: number }
-    { x: 'BB/BB/BB', y: 6 },
-    { x: 'CC/CC/CC', y: 9 },
-    { x: 'DD/DD/DD', y: 14 },
-    { x: 'EE/EE/EE', y: 6 },
-    { x: 'FF/FF/FF', y: 11 },
-    { x: 'GG/GG/GG', y: 7 },
-    { x: 'HH/HH/HH', y: 8 },
-    { x: 'II/II/II', y: 9 },
-    { x: 'JJ/JJ/JJ', y: 19 },
+      { x: '07:30', y: 1385 }, // { x?: string | number; y: number }
+      { x: '07:00', y: 1410 },
+      { x: '08:00', y: 1390 },
+      { x: '08:30', y: 1407 },
+      { x: '09:00', y: 1395 },
+      { x: '09:30', y: 1402 },
+      { x: '10:00', y: 1390 },
+      { x: '10:30', y: 1400 },
+      { x: '11:30', y: 1413 },
+      { x: '12:00', y: 1399 },
   ],
   // dataFormat?:  | 'USD'| 'EUR' | 'JPY' | 'GBP' | 'AUD' | 'CHF' | 'CAD' | 'CNY' | 'SEK' | 'NZD' | 'BRL' | 'RUB' | 'INR' | 'MXN' | '%' | 'º'
   dataFormat: 'USD',
@@ -57,6 +61,13 @@ Create a variable with the configurations.
   fill: { // optional
     display: true, // display: boolean
     color: '#0e9cff33', // color: string
+  },
+  tooltip: { // optional
+    fontFamily: 'Arial', // fontFamily?: string
+    fontSize: '14px', // fontSize?: string
+    color: '#1e1e1e', // color?: string
+    borderRadius: '8px', // borderRadius?: string
+    backgroundColor: '#1e1e1e33', // backgroundColor?: string
   },
   responsive: true, // responsive?: boolean
   x: { // optional
