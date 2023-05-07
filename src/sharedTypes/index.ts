@@ -19,6 +19,13 @@ export type CfgType = {
     display: boolean
     color: string
   }
+  tooltip?: {
+    fontFamily?: string
+    fontSize?: string
+    color?: string
+    borderRadius: string
+    backgroundColor?: string
+  }
   responsive?: boolean
   x?: {
     label?: {
@@ -88,6 +95,20 @@ export type DataFormatType =
   | '%'
   | 'º'
 
+export type GridsType = {
+  coordinate: number
+  value: string | number
+}
+
+export type AnimationsCfgType = {
+  pos: number
+  targetY: number
+  currentY: number
+  baseSpeed: number
+  globalSpeed: number
+  finished: boolean
+}
+
 export type DrawCfgType = {
   lineWidth: number
   lineColor: string
@@ -121,7 +142,26 @@ export type ElementsCfgType = {
   yLabels: number[]
 }
 
-export type GridsType = {
-  coordinate: number
-  value: string | number
+export type tooltipCfgType = {
+  fontFamily: string
+  fontSize: string
+  color: string
+  borderRadius: string
+  backgroundColor: string
+}
+
+export type aggregateCalculatedDataType = {
+  canvasRef: React.RefObject<HTMLCanvasElement>
+  ctx: CanvasRenderingContext2D
+  data: number[]
+  dataFormat: DataFormatType | null
+  yLabelsFormatted: number[] | string[]
+  xCoordinates: number[]
+  yCoordinates: number[]
+  chartFloorCoordinate: number
+  paddings: PaddingsType
+  tooltip: tooltipCfgType
+  animationsCfg: AnimationsCfgType[]
+  drawCfg: DrawCfgType
+  elementsCfg: ElementsCfgType
 }

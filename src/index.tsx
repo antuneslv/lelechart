@@ -1,13 +1,15 @@
-import { useRef, useEffect } from 'react'
-import { drawChart } from './drawChart'
+import { useRef, useEffect, useState } from 'react'
+import { aggregateCalculatedData } from './aggregateCalculatedData'
 import { resizeCanvas } from './resizeCanvas'
-import { CfgType } from './sharedTypes'
-
-export type { CfgType }
+import { CfgType, aggregateCalculatedDataType } from './sharedTypes'
+import { Tooltip } from './components/Tooltip'
+import { drawAnimatedLineChart } from './drawAnimatedLineChart'
+import { drawLineChart } from './drawLineChart'
 
 export function Chart(cfg: CfgType) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   let ctx = canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
+  const [aCData, setACData] = useState<aggregateCalculatedDataType | null>(null)
 
   if (
     typeof cfg.dimensions.maxWidth !== 'number' ||
@@ -30,8 +32,8 @@ export function Chart(cfg: CfgType) {
   const aspectRatio = cfg.dimensions.maxWidth / cfg.dimensions.maxHeight
 
   useEffect(() => {
-    ctx = canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
     if (canvasRef.current) {
+      ctx = canvasRef.current.getContext('2d') as CanvasRenderingContext2D
       if (innerWidth >= cfg.dimensions.maxWidth) {
         canvasRef.current.width =
           cfg.dimensions.maxWidth - cfg.dimensions.paddingX
@@ -50,17 +52,68 @@ export function Chart(cfg: CfgType) {
       }
     }
     generateChart(cfg)
-  }, [cfg])
+  }, [cfg, canvasRef.current?.width])
+
+  function drawChart(
+    canvasRef: React.RefObject<HTMLCanvasElement>,
+    ctx: CanvasRenderingContext2D,
+    aCData: aggregateCalculatedDataType,
+    cfg: CfgType,
+  ) {
+    if (cfg.animation?.isEnable) {
+      drawAnimatedLineChart(
+        canvasRef,
+        ctx,
+        aCData.yLabelsFormatted,
+        aCData.xCoordinates,
+        aCData.chartFloorCoordinate,
+        aCData.paddings,
+        aCData.animationsCfg,
+        aCData.drawCfg,
+        aCData.elementsCfg,
+      )
+      return
+    }
+    drawLineChart(
+      canvasRef,
+      ctx,
+      aCData.yLabelsFormatted,
+      aCData.xCoordinates,
+      aCData.yCoordinates,
+      aCData.chartFloorCoordinate,
+      aCData.paddings,
+      aCData.drawCfg,
+      aCData.elementsCfg,
+    )
+  }
 
   function generateChart(cfg: CfgType) {
-    drawChart(canvasRef, ctx, cfg)
+    const aCData = aggregateCalculatedData(canvasRef, ctx, cfg)
+    setACData(aCData)
+    drawChart(canvasRef, ctx, aCData, cfg)
     cfg.responsive && resize()
   }
 
   function resize() {
+    const aCData = aggregateCalculatedData(canvasRef, ctx, cfg)
+    setACData(aCData)
     resizeCanvas(drawChart, canvasRef, ctx, cfg)
     window.addEventListener('resize', resize)
   }
 
-  return <canvas ref={canvasRef} />
+  return (
+    <div style={{ position: 'relative' }}>
+      <canvas ref={canvasRef} />
+      {aCData && (
+        <Tooltip
+          canvasRef={canvasRef}
+          data={aCData.data}
+          tooltipCfg={aCData.tooltip}
+          xCoordinates={aCData.xCoordinates}
+          yCoordinates={aCData.yCoordinates}
+          dataFormat={aCData.dataFormat}
+        />
+      )}
+    </div>
+  )
 }

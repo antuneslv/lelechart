@@ -1,4 +1,4 @@
-import { CfgType, DataFormatType } from '../sharedTypes'
+import { CfgType, DataFormatType, tooltipCfgType } from '../sharedTypes'
 
 /**
  * Process the data to ensure the app doesn't break
@@ -14,6 +14,7 @@ export function processData(cfg: CfgType) {
     color: rawColor,
     fill: rawFill,
     lineWidth: rawLineWidth,
+    tooltip: rawTooltip,
     x: rawX,
     y: rawY,
   } = cfg
@@ -76,6 +77,34 @@ export function processData(cfg: CfgType) {
   let lineWidth = rawLineWidth
 
   if (!lineWidth || typeof lineWidth !== 'number') lineWidth = 2
+
+  let tooltip = rawTooltip as tooltipCfgType
+
+  if (!tooltip || typeof tooltip !== 'object') {
+    tooltip = {
+      fontFamily: 'Arial',
+      fontSize: '14px',
+      color: '#1e1e1e',
+      borderRadius: '8px',
+      backgroundColor: '#1e1e1e33',
+    }
+  }
+
+  if (!tooltip.fontFamily || typeof tooltip.fontFamily !== 'string') {
+    tooltip.fontFamily = 'Arial'
+  }
+  if (!tooltip.fontSize || typeof tooltip.fontSize !== 'string') {
+    tooltip.fontSize = '14px'
+  }
+  if (!tooltip.color || typeof tooltip.color !== 'string') {
+    tooltip.color = '#1e1e1e'
+  }
+  if (!tooltip.borderRadius || typeof tooltip.borderRadius !== 'string') {
+    tooltip.borderRadius = '8px'
+  }
+  if (!tooltip.backgroundColor || typeof tooltip.backgroundColor !== 'string') {
+    tooltip.backgroundColor = '#1e1e1e33'
+  }
 
   let x = rawX
 
@@ -255,6 +284,7 @@ export function processData(cfg: CfgType) {
     color,
     fill,
     lineWidth,
+    tooltip,
     x,
     y,
   }
