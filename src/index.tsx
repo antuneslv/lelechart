@@ -53,7 +53,7 @@ export function Chart(cfg: CfgType) {
       }
     }
     generateChart(cfg)
-  }, [cfg, canvasRef.current?.width])
+  }, [cfg])
 
   function drawChart(
     canvasRef: React.RefObject<HTMLCanvasElement>,
