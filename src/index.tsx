@@ -7,6 +7,8 @@ import { Tooltip } from './components/Tooltip'
 import { drawAnimatedLineChart } from './drawAnimatedLineChart'
 import { drawLineChart } from './drawLineChart'
 
+export type { CfgType }
+
 export function Chart(cfg: CfgType) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   let ctx = canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
