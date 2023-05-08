@@ -13,8 +13,8 @@
     "url": "https://github.com/antuneslv/lelechart"
   },
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
-    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react --no-config",
+    "dev": "tsup src/test-dev.tsx --watch",
     "lint": "eslint src/**/*.ts* --fix"
   },
   "keywords": [
@@ -37,6 +37,7 @@
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
   }
