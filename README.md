@@ -38,8 +38,8 @@ Create a variable with the configurations.
     paddingX: 40, // paddingX: number
   },
   data: [
-      { x: '07:30', y: 1385 }, // { x?: string | number; y: number }
-      { x: '07:00', y: 1410 },
+      { x: '07:00', y: 1385 }, // { x?: string | number; y: number }
+      { x: '07:30', y: 1410 },
       { x: '08:00', y: 1390 },
       { x: '08:30', y: 1407 },
       { x: '09:00', y: 1395 },
