@@ -17,6 +17,8 @@ export function aggregateCalculatedData(
   ctx: CanvasRenderingContext2D,
   cfg: CfgType,
 ) {
+  const canvas = canvasRef.current as HTMLCanvasElement
+
   const dataLength = cfg.data.length
 
   const {
@@ -76,12 +78,12 @@ export function aggregateCalculatedData(
   )
 
   const xAxisDistance =
-    (canvasRef.current!.width - paddings.paddingLeft - paddings.paddingRight) /
+    (canvas.width - paddings.paddingLeft - paddings.paddingRight) /
     (dataLength - 1)
 
   const { xCoordinates, yCoordinates, chartFloorCoordinate } =
     calculateCoordinates(
-      canvasRef,
+      canvas,
       data,
       paddings,
       xAxisDistance,
@@ -93,7 +95,7 @@ export function aggregateCalculatedData(
     animationsCfg.push({
       pos: i,
       targetY: yCoordinates[i],
-      currentY: canvasRef.current!.height,
+      currentY: canvas.height,
       baseSpeed: 1,
       globalSpeed: animation.speed,
       finished: false,

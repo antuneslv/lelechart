@@ -2,7 +2,7 @@ import { PaddingsType } from '../sharedTypes'
 
 /**
  * Calculates X and Y and chart floor Coordinates
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param data Array with data
  * @param paddings Object with paddings
  * @param xAxisDistance Distance of X Axis
@@ -11,7 +11,7 @@ import { PaddingsType } from '../sharedTypes'
  * @returns Object with coordinates calculated
  */
 export function calculateCoordinates(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   data: number[],
   paddings: PaddingsType,
   xAxisDistance: number,
@@ -25,13 +25,11 @@ export function calculateCoordinates(
     const percentageOfValues = ((data - minYTick) / (maxYTick - minYTick)) * 100
 
     const yCoordinate =
-      canvasRef.current!.height -
+      canvas.height -
       paddings.paddingTop -
       paddings.paddingBottom -
       (percentageOfValues *
-        (canvasRef.current!.height -
-          paddings.paddingTop -
-          paddings.paddingBottom)) /
+        (canvas.height - paddings.paddingTop - paddings.paddingBottom)) /
         100 +
       paddings.paddingTop
 
@@ -39,8 +37,7 @@ export function calculateCoordinates(
     yCoordinates.push(yCoordinate)
   })
 
-  const chartFloorCoordinate =
-    canvasRef.current!.height - paddings.paddingBottom
+  const chartFloorCoordinate = canvas.height - paddings.paddingBottom
 
   return { xCoordinates, yCoordinates, chartFloorCoordinate }
 }

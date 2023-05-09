@@ -24,10 +24,12 @@ export function drawLineChart(
   drawCfg: DrawCfgType,
   elementsCfg: ElementsCfgType,
 ) {
-  ctx.clearRect(0, 0, canvasRef.current!.width, canvasRef.current!.height)
+  const canvas = canvasRef.current as HTMLCanvasElement
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 
   drawElements(
-    canvasRef,
+    canvas,
     ctx,
     yLabelsFormatted,
     xCoordinates,

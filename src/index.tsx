@@ -2,10 +2,10 @@ import { useRef, useEffect, useState } from 'react'
 
 import { aggregateCalculatedData } from './aggregateCalculatedData'
 import { resizeCanvas } from './resizeCanvas'
-import { CfgType, aggregateCalculatedDataType } from './sharedTypes'
-import { Tooltip } from './components/Tooltip'
 import { drawAnimatedLineChart } from './drawAnimatedLineChart'
 import { drawLineChart } from './drawLineChart'
+import { CfgType, aggregateCalculatedDataType } from './sharedTypes'
+import { Tooltip } from './components/Tooltip'
 
 export type { CfgType }
 

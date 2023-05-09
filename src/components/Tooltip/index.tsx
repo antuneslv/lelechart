@@ -20,6 +20,7 @@ export function Tooltip({
   yCoordinates,
   dataFormat,
 }: TooltipType) {
+  const canvas = canvasRef.current as HTMLCanvasElement
   const formattedData = formatData(data, dataFormat)
 
   const [tooltip, setTooltip] = useState(false)
@@ -53,7 +54,7 @@ export function Tooltip({
         setTooltip(false)
       }
     } else if (tooltip === false) {
-      const canvasRect = canvasRef.current!.getBoundingClientRect()
+      const canvasRect = canvas.getBoundingClientRect()
       const distanceToCanvasBorderY = canvasRect.bottom - event.pageY
       const distanceToCanvasBorderX = event.pageX - canvasRect.left
 
@@ -89,7 +90,7 @@ export function Tooltip({
     }
   }
 
-  canvasRef.current?.addEventListener('mousemove', handleMouseMove)
+  canvas.addEventListener('mousemove', handleMouseMove)
 
   return <>{tooltip && tooltipElement}</>
 }

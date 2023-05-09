@@ -2,7 +2,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
 
 /**
  * Draw X labels
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param ctx Canvas 2D context
  * @param xLabelFont X label font
  * @param xLabelColor X label color
@@ -10,7 +10,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
  * @param paddings Object with paddings
  */
 export function drawXLabels(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   xLabelFont: string,
   xLabelColor: string,
@@ -42,7 +42,7 @@ export function drawXLabels(
     ctx.fillText(
       labelText,
       grid.coordinate - finalWidthLabelText / 2,
-      canvasRef.current!.height - paddings.paddingBase,
+      canvas.height - paddings.paddingBase,
     )
   })
 }

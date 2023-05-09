@@ -2,7 +2,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
 
 /**
  * Draw X grids
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param ctx Canvas 2D context
  * @param xGridsLineWidth X grid line width
  * @param xGridsColor X grid color
@@ -10,7 +10,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
  * @param paddings Object with paddings
  */
 export function drawXGrids(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   xGridsLineWidth: number,
   xGridsColor: string,
@@ -23,10 +23,7 @@ export function drawXGrids(
     ctx.strokeStyle = xGridsColor
 
     ctx.moveTo(grid.coordinate, paddings.paddingTop)
-    ctx.lineTo(
-      grid.coordinate,
-      canvasRef.current!.height - paddings.paddingBottom,
-    )
+    ctx.lineTo(grid.coordinate, canvas.height - paddings.paddingBottom)
 
     ctx.stroke()
   })
@@ -34,7 +31,7 @@ export function drawXGrids(
 
 /**
  * Draw Y grids
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param ctx Canvas 2D context
  * @param yGridsLineWidth Y grid line width
  * @param yGridsColor Y grid color
@@ -42,7 +39,7 @@ export function drawXGrids(
  * @param paddings Object with paddings
  */
 export function drawYGrids(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   yGridsLineWidth: number,
   yGridsColor: string,
@@ -55,10 +52,7 @@ export function drawYGrids(
     ctx.strokeStyle = yGridsColor
 
     ctx.moveTo(paddings.paddingLeft, grid.coordinate)
-    ctx.lineTo(
-      canvasRef.current!.width - paddings.paddingRight,
-      grid.coordinate,
-    )
+    ctx.lineTo(canvas.width - paddings.paddingRight, grid.coordinate)
 
     ctx.stroke()
   })

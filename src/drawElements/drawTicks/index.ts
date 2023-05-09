@@ -2,7 +2,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
 
 /**
  * Draw X Ticks
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param ctx Canvas 2D context
  * @param xTicksLineWidth X ticks line width
  * @param xTicksColor X ticks color
@@ -12,7 +12,7 @@ import { GridsType, PaddingsType } from '../../sharedTypes'
  * @param paddings Object with paddings
  */
 export function drawXTicks(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   xTicksLineWidth: number,
   xTicksColor: string,
@@ -26,10 +26,7 @@ export function drawXTicks(
     ctx.lineWidth = xTicksLineWidth
     ctx.strokeStyle = xTicksColor
 
-    ctx.moveTo(
-      grid.coordinate,
-      canvasRef.current!.height - paddings.paddingBottom,
-    )
+    ctx.moveTo(grid.coordinate, canvas.height - paddings.paddingBottom)
     ctx.lineTo(grid.coordinate, chartFloorCoordinate + xTicksLength)
 
     ctx.stroke()

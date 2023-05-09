@@ -5,7 +5,7 @@ import { ElementsCfgType, GridsType, PaddingsType } from '../sharedTypes'
 
 /**
  * Manages the background elements that will be drawn
- * @param canvasRef Canvas reference
+ * @param canvas Canvas reference
  * @param ctx Canvas 2D context
  * @param yLabelsFormatted Array of Y labels
  * @param xCoordinates X Coordinates
@@ -14,7 +14,7 @@ import { ElementsCfgType, GridsType, PaddingsType } from '../sharedTypes'
  * @param elementsCfg Object with elements configuration
  */
 export function drawElements(
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   yLabelsFormatted: number[] | string[],
   xCoordinates: number[],
@@ -22,7 +22,7 @@ export function drawElements(
   paddings: PaddingsType,
   elementsCfg: ElementsCfgType,
 ) {
-  canvasRef.current!.style.background = elementsCfg.backgroundColor
+  canvas.style.background = elementsCfg.backgroundColor
 
   const {
     xGridsLineWidth,
@@ -53,13 +53,11 @@ export function drawElements(
       ((value - minYAxisValue) / (maxYAxisValue - minYAxisValue)) * 100
 
     const yCoordinate =
-      canvasRef.current!.height -
+      canvas.height -
       paddings.paddingTop -
       paddings.paddingBottom -
       (percentageOfValues *
-        (canvasRef.current!.height -
-          paddings.paddingTop -
-          paddings.paddingBottom)) /
+        (canvas.height - paddings.paddingTop - paddings.paddingBottom)) /
         100 +
       paddings.paddingTop
 
@@ -74,16 +72,16 @@ export function drawElements(
   })
 
   elementsCfg.hasXGrids &&
-    drawXGrids(canvasRef, ctx, xGridsLineWidth, xGridsColor, xGrids, paddings)
+    drawXGrids(canvas, ctx, xGridsLineWidth, xGridsColor, xGrids, paddings)
   elementsCfg.hasYGrids &&
-    drawYGrids(canvasRef, ctx, yGridsLineWidth, yGridsColor, yGrids, paddings)
+    drawYGrids(canvas, ctx, yGridsLineWidth, yGridsColor, yGrids, paddings)
   elementsCfg.hasXLabel &&
-    drawXLabels(canvasRef, ctx, xLabelFont, xLabelColor, xGrids, paddings)
+    drawXLabels(canvas, ctx, xLabelFont, xLabelColor, xGrids, paddings)
   elementsCfg.hasYLabel &&
     drawYLabels(ctx, yLabelFont, yLabelColor, yGrids, paddings)
   elementsCfg.hasXTicks &&
     drawXTicks(
-      canvasRef,
+      canvas,
       ctx,
       xTicksLineWidth,
       xTicksColor,
