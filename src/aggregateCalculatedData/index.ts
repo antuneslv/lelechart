@@ -1,4 +1,4 @@
-import { processData } from '../processData'
+import { processAllData } from '../processAllData'
 import { measureText } from '../measureTexts'
 import { calculatePaddings } from '../calculatePaddings'
 import { calculateYLabels } from '../calculateYLabels'
@@ -19,8 +19,6 @@ export function aggregateCalculatedData(
 ) {
   const canvas = canvasRef.current as HTMLCanvasElement
 
-  const dataLength = cfg.data.length
-
   const {
     data: processedData,
     dataFormat,
@@ -32,7 +30,9 @@ export function aggregateCalculatedData(
     tooltip,
     x,
     y,
-  } = processData(cfg)
+  } = processAllData(cfg)
+
+  const dataLength = processedData.length
 
   const paddingsCfg = {
     hasXLabel: x.label!.display,

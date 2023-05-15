@@ -1,11 +1,12 @@
 import { CfgType, DataFormatType, tooltipCfgType } from '../sharedTypes'
+import { processData } from './processData'
 
 /**
- * Process the data to ensure the app doesn't break
+ * Process all data to ensure the app doesn't break
  * @param cfg Configuration object
- * @returns Object with processed datas
+ * @returns Object with all processed datas
  */
-export function processData(cfg: CfgType) {
+export function processAllData(cfg: CfgType) {
   const {
     data: rawData,
     dataFormat: rawDataFormat,
@@ -19,19 +20,7 @@ export function processData(cfg: CfgType) {
     y: rawY,
   } = cfg
 
-  const data = rawData
-
-  data.forEach((rawData, index) => {
-    if (!rawData.x) {
-      data[index].x = ''
-    }
-
-    if (typeof rawData.x === 'number') rawData.x.toString()
-
-    if (!rawData.y || typeof rawData.y !== 'number') {
-      data[index].y = 0
-    }
-  })
+  const data = processData(rawData)
 
   let dataFormat: DataFormatType | undefined | null = rawDataFormat
 

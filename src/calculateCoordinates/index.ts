@@ -22,7 +22,9 @@ export function calculateCoordinates(
   const yCoordinates: number[] = []
 
   data.forEach((data, index) => {
-    const percentageOfValues = ((data - minYTick) / (maxYTick - minYTick)) * 100
+    const range = maxYTick - minYTick <= 0 ? 1 : maxYTick - minYTick
+
+    const percentageOfValues = ((data - minYTick) / range) * 100
 
     const yCoordinate =
       canvas.height -

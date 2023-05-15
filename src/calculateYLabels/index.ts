@@ -16,7 +16,8 @@ export function calculateYLabels(
   const maxData = Math.max(...data)
   const minData = Math.min(...data)
 
-  const range = maxData - minData
+  let range = maxData - minData
+  if (range === 0) range = 1
 
   let initialNumYTicks
 
@@ -47,19 +48,27 @@ export function calculateYLabels(
 
   const yGridSpacing = mostSignificantDigit * magnitudePow10
 
-  const minYTick = Math.floor(minData / yGridSpacing) * yGridSpacing
-  const maxYTick = Math.ceil(maxData / yGridSpacing) * yGridSpacing
-
-  function fixJsCalc(a: number, b: number, precision: number) {
+  function fixJsCalc(precision: number, a: number, b = 0) {
     const factor = 10 ** precision
     const result = a + b
     return Math.round(result * factor) / factor
   }
 
-  let fixedJsCalc = 0
-  for (let i = minYTick; i < maxYTick + yGridSpacing; i += yGridSpacing) {
-    i === minYTick ? yLabels.push(i) : yLabels.push(fixedJsCalc)
-    fixedJsCalc = fixJsCalc(i, yGridSpacing, 4)
+  const minYTick = fixJsCalc(
+    4,
+    Math.floor(minData / yGridSpacing) * yGridSpacing,
+  )
+  const maxYTick = fixJsCalc(
+    4,
+    Math.ceil(maxData / yGridSpacing) * yGridSpacing,
+  )
+
+  for (
+    let i = minYTick;
+    i < maxYTick + yGridSpacing;
+    i = fixJsCalc(4, i, yGridSpacing)
+  ) {
+    yLabels.push(i)
   }
 
   const yLabelsFormatted = formatData(yLabels, dataFormat)
