@@ -121,7 +121,7 @@ Call the component passing the configurations.
 ```
 <br/>
 
-## Licença
+## License
 
 <br/>
 
